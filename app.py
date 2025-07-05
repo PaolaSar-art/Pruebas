@@ -8,4 +8,9 @@ nombre = st.text_input("¿Cuál es tu nombre?")
 
 # Mostrar saludo si se ingresa un nombre
 if nombre:
-    st.write(f"¡Hola, {nombre}!")
+    st.write(f"¡Hola, {nombre}! ¿Cómo estas?")   
+
+
+
+
+    import pandas
