@@ -1,12 +1,32 @@
-
 import streamlit as st
+import pandas as pd
+import plotly.express as px
 
-# Título de la app
-st.title("👋 ¡Bienvenido a mi app sencilla!")
+# Cargar datos
+df = pd.read_csv('vehicles_us.csv')
 
-# Entrada de texto
-nombre = st.text_input("Escribe tu nombre:")
+st.header('Dashboard de Vehículos en Venta (EE.UU.)')
 
-# Botón para generar saludo
-if st.button("Saludar"):
-    st.success(f"Hola, {nombre}! Qué gusto tenerte aquí 😊")
+# Histograma
+if st.checkbox('Mostrar histograma de precios'):
+    fig = px.histogram(df, x='price')
+    st.plotly_chart(fig)
+
+# Dispersión
+if st.checkbox('Mostrar diagrama de dispersión precio vs año'):
+    fig2 = px.scatter(df, x='model_year', y='price', color='condition')
+    st.plotly_chart(fig2)
+
+#Descripción
+st.markdown('''
+## Descripción del proyecto
+
+Esta aplicación web, desarrollada con Streamlit, permite explorar de forma interactiva un conjunto de datos de anuncios de vehículos en Estados Unidos.
+
+Su propósito es ofrecer una herramienta visual para comprender mejor la distribución de precios y la relación entre el precio y el año de fabricación de los automóviles.
+
+**Funcionalidades**:
+- Carga y preprocesamiento automático de un archivo CSV con información de vehículos.
+- Histograma de precios configurable mediante casilla de verificación.
+- Diagrama de dispersión que muestra la relación entre precio y año de modelo.
+- Plataforma ligera que se ejecuta en un entorno virtual de Python y se despliega fácilmente en Render.''')
